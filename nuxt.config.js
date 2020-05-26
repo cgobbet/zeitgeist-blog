@@ -1,3 +1,9 @@
+import axios from 'axios';
+let dynamicRoutes = () => {
+	return axios.get('https://zeitgeist.digital/wp-json/wp/v2/posts').then(res => {
+		return res.data.map(post => `/blog/${post.slug}`);
+	});
+};
 
 export default {
   mode: 'universal',
@@ -28,7 +34,13 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    "~/plugins/posts.server.js",
+    "~/plugins/tags.server.js",
+    "~/plugins/dateformat.js"
   ],
+  generate: {
+    routes: dynamicRoutes
+  },
   /*
   ** Nuxt.js dev-modules
   */
