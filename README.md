@@ -1,3 +1,5 @@
+![Banksy and Zeitgeist](https://.90minutos.org/img/banksy_zeitgeist.jpg)
+
 # zeitgeist-blog
 
 > Headless WordPress Site On The JAMstack
