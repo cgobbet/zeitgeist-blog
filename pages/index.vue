@@ -10,11 +10,13 @@
         <a :href="`blog/${post.slug}`">{{ post.title.rendered }}</a>
       </h3>
       <div v-html="post.excerpt.rendered"></div>
-      <a :href="`blog/${post.slug}`" class="readmore">Continue...</a>
+      <a :href="`blog/${post.slug}`" class="readmore">...</a>
     </div>
   </main>
   </div>
 </template>
+
+
 
 <script>
 export default {
