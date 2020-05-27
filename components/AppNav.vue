@@ -2,8 +2,8 @@
   <div class="nav">
     <ul>
       <li>
-        <nuxt-link exact to="/">
-          <!-- <app-icon></app-icon>BlogName -->
+        <nuxt-link exact to="/" class="padding-title">
+          <img src="../static/zeit-icon-white.png">
         </nuxt-link>
       </li>
       <li>
@@ -27,7 +27,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+img {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+
 .nav {
+  font-family: 'Oswald', sans-serif;
   background: #000;
   color: #fff;
   padding: 1em 100px;
