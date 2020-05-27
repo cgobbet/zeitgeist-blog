@@ -64,7 +64,8 @@ video {
 }
 
 small {
-  color: #9d5615;
+  font-family: 'Oswald', sans-serif;
+  color: #781820;
 }
 
 pre,
