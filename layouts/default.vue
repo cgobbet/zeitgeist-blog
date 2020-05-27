@@ -1,20 +1,41 @@
 <template>
   <div>
+    <app-nav />
     <nuxt />
   </div>
 </template>
 
+<script>
+import AppNav from "~/components/AppNav.vue";
+
+export default {
+  components: {
+    AppNav
+  }
+};
+</script>
+
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Alata", serif;
+  font-weight: normal;
 }
 
 *,
@@ -24,32 +45,49 @@ html {
   margin: 0;
 }
 
-.button--green {
-  display: inline-block;
+.individual h3 {
+  margin: 2em 0 25px;
+}
+
+h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
+
+video {
+  width: 100%;
+  margin: 25px 0;
+}
+
+small {
+  color: #9d5615;
+}
+
+pre,
+code {
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  background: #eee;
   border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+pre {
+  padding: 8px 10px;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+code {
+  padding: 2px 0;
+  line-height: 1.5;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+p {
+  margin: 15px 0 20px;
 }
 </style>
