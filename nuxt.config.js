@@ -1,7 +1,7 @@
 import axios from "axios"
 let dynamicRoutes = () => {
   const routes = axios
-    .get("https://thinking.media/wp-json/wp/v2/posts?page=1&per_page=20")
+    .get("https://zeitgeist.digital/wp-json/wp/v2/posts?page=1&per_page=20")
     .then(res => {
       return res.data.map(post => `/blog/${post.slug}`)
     })
