@@ -3,7 +3,8 @@
     <ul>
       <li>
         <nuxt-link exact to="/" class="padding-title">
-          <img src="../static/zeit-icon-white.png">
+          <!-- <app-icon></app-icon>BlogName -->
+          <img src="../static/zeit-icon-white.png"/>Digital Zeitgeist
         </nuxt-link>
       </li>
       <li>
@@ -64,4 +65,5 @@ ul {
     margin-right: 30px;
   }
 }
+
 </style>
