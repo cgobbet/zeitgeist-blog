@@ -1,4 +1,4 @@
-const siteURL = "https://thinking.media"
+const siteURL = "https://zeitgeist.digital"
 
 export const state = () => ({
   posts: [],
