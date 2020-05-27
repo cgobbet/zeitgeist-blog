@@ -1,101 +1,210 @@
 <template>
-<div class="posts">
-  <main>
-    <h2>Digital Zeitgeist</h2>
-    <h4>Life read in Ones and Zeroes</h4>
-  <!-- here we loop through the posts -->
-    <div class="post" v-for="post in posts" :key="post.id">
-      <h3>
-      <!-- for each one of them, we’ll render their title, and link off to their individual page -->
-        <a :href="`blog/${post.slug}`">{{ post.title.rendered }}</a>
-      </h3>
-      <div v-html="post.excerpt.rendered"></div>
-      <a :href="`blog/${post.slug}`" class="readmore">...</a>
+  <div>
+    <app-masthead></app-masthead>
+    <div class="posts">
+      <main>
+        <div class="post" v-for="post in sortedPosts" :key="post.id">
+          <h3>
+            <a :href="`blog/${post.slug}`">{{ post.title.rendered }}</a>
+          </h3>
+          <small>{{ post.date | dateformat }}</small>
+          <div v-html="post.excerpt.rendered"></div>
+          <a :href="`blog/${post.slug}`" class="readmore slide">+++</a>
+        </div>
+      </main>
+      <aside>
+        <h2 class="tags-title">Tags</h2>
+        <div class="tags-list">
+          <ul>
+            <li
+              @click="updateTag(tag)"
+              v-for="tag in tags"
+              :key="tag.id"
+              :class="[tag.id === selectedTag ? activeClass : '']"
+            >
+              <a>{{ tag.name }}</a>
+              <span v-if="tag.id === selectedTag">✕</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
     </div>
-  </main>
   </div>
 </template>
 
-
-
 <script>
+import AppMasthead from "@/components/AppMasthead.vue";
+
 export default {
-computed: {
-  posts() {
-    return this.$store.state.posts;
+  components: {
+    AppMasthead
   },
- },
-created() {
-  this.$store.dispatch("getPosts");
-},
+  data() {
+    return {
+      selectedTag: null,
+      activeClass: "active"
+    };
+  },
+  computed: {
+    posts() {
+      return this.$store.state.posts;
+    },
+    tags() {
+      return this.$store.state.tags;
+    },
+    sortedPosts() {
+      if (!this.selectedTag) return this.posts;
+      return this.posts.filter(el => el.tags.includes(this.selectedTag));
+    }
+  },
+  created() {
+    this.$store.dispatch("getPosts");
+  },
+  methods: {
+    updateTag(tag) {
+      if (!this.selectedTag) {
+        this.selectedTag = tag.id;
+      } else {
+        this.selectedTag = null;
+      }
+    }
+  }
 };
 </script>
 
-<style>
-body {
-  padding: 0.3rem;
+<style lang="scss">
+.posts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 6vw;
+  margin: 5em auto;
+  max-width: 80vw;
 }
 
-a {
-  text-decoration: none;
-  /* text-decoration-color: #21ff21; */
+main {
+  grid-area: 1 / 1 / 2 / 2;
 }
 
-a.readmore {
-  font-family: 'ITC Bauhaus', sans-serif;
-  font-size: 0.8em;
+aside {
+  grid-area: 1 / 2 / 2 / 3;
 }
 
 h2 {
-  font-family: 'Futura', sans-serif;
-  font-size: 2rem;
-  padding: 1rem 0 1rem 0;  
+  margin-bottom: 2em;
 }
 
-h3 {
-  font-family: 'Oswald', sans-serif;
-  color: 'black;';
-  font-weight: regular;
-  padding: 1rem 0 1rem 0;
+a,
+a:active,
+a:visited {
+  text-decoration: none;
+  color: black;
 }
 
-h4 {
-  font-family: 'ITC Bauhaus', sans-serif;
-  font-size: 1rem;  
+a.readmore {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  letter-spacing: 2px;
+  position: relative;
+  color: #000;
+  font-weight: 700;
+  font-family: "Open Sans", serif;
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
-p {
-  font-family: 'Ideal-Grotesk', sans-serif;
+.tags-title {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  font-size: 1.2rem;
+  padding: 15px;
+  margin: 0 35px;
+  position: relative;
+  top: -25px;
 }
 
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.tags-list {
+  background: #f5f5f5;
+  padding: 70px 25px 25px;
+  margin-top: -65px;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
+.post {
+  border-bottom: 1px solid rgb(223, 222, 222);
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  color: #444;
+
+  h3 {
+    margin-bottom: 0.5em;
+    font-size: 26px;
+  }
+}
+
+.tags-list ul {
+  padding-left: 0;
+}
+
+.tags-list li {
+  font-family: "Open Sans", serif;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 15px;
+  margin: 0 0 10px 10px;
+  display: inline-block;
+  font-size: 0.7rem !important;
+  border: 1px solid #000;
+  transition: all 0.3s;
+  outline: none;
+  font-weight: normal;
+  cursor: pointer;
+  background: #fff;
+  a {
+    color: #000;
+  }
 }
 
-.h4 {
-  font-weight: 300;
-  font-size: 42px;
-  color: "black";
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.active {
+  border: 1px solid #d44119;
+  background-color: #fae091 !important;
 }
 
-.links {
-  padding-top: 15px;
+.slide {
+  position: relative;
+  background: transparent;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  z-index: 1;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translateZ(0);
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &:hover:before {
+    right: -1px;
+  }
+}
+
+.slide::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: #000;
+  transition: right 0.3s ease;
+  z-index: -1;
+  top: -2px;
+  bottom: -2px;
+  left: -2px;
+  right: 108%;
+  backface-visibility: hidden;
 }
 </style>
