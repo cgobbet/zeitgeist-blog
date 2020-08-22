@@ -4,7 +4,7 @@
       <li>
         <nuxt-link exact to="/" class="padding-title">
           <!-- <app-icon></app-icon>BlogName -->
-          <img src="../static/zeit-icon-white.png"/>Digital Zeitgeist
+          <img src="../static/zdlogo.png"/>Digital Zeitgeist
         </nuxt-link>
       </li>
       <li>

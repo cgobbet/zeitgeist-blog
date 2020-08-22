@@ -17,7 +17,7 @@ export default {
 
 <style>
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 18px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -34,7 +34,7 @@ body {
 h1,
 h2,
 h3 {
-  font-family: "Alata", serif;
+  font-family: "Oswald", sans-serif;
   font-weight: normal;
 }
 
@@ -52,6 +52,7 @@ h3 {
 h1 {
   margin-bottom: 30px;
   text-align: center;
+  color: "fuchsia";
 }
 
 img {
